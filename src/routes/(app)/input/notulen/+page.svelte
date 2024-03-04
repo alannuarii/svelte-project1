@@ -1,3 +1,16 @@
+<script>
+	import { pegawai, ophar, cs, security } from '../../../../lib/js/data';
+
+	let arrPegawai = [];
+
+	const handleArrPegawai = (event) => {
+		const selectedValue = event.target.value;
+		arrPegawai = [...arrPegawai, selectedValue]; // Menggunakan spread operator untuk membuat referensi baru
+	};
+
+	$: console.log(arrPegawai);
+</script>
+
 <div>
 	<div class="card p-3">
 		<h4 class="text-center mb-3">NOTULEN RAPAT</h4>
@@ -47,20 +60,22 @@
 					<p>ULPLTD Kotamobagu</p>
 				</div>
 				<ol class="list-group list-group-numbered list-group-flush mb-2">
-					<li class="list-group-item">Bahar Sudrajat</li>
-					<li class="list-group-item">Vecky Pandeirot</li>
-					<li class="list-group-item">Febriandy Mandagi</li>
-					<li class="list-group-item">Asep Kusmiadi</li>
-					<li class="list-group-item">Alan Nuari</li>
+					{#if arrPegawai.length > 0}
+						{#each arrPegawai as peg}
+							<li class="list-group-item">{peg}</li>
+						{/each}
+					{/if}
 				</ol>
 				<div class="mx-2">
-					<select class="form-select form-select-sm" aria-label="Default select example">
+					<select
+						class="form-select form-select-sm"
+						aria-label="Default select example"
+						on:change={handleArrPegawai}
+					>
 						<option selected>Pilih nama . . .</option>
-						<option value="1">Bahar Sudrajat</option>
-						<option value="2">Vecky Pandeirot</option>
-						<option value="3">Febriandy Mandagi</option>
-						<option value="4">Alan Nuari</option>
-						<option value="5">Asep Kusmiadi</option>
+						{#each pegawai as peg}
+							<option value={peg.nama}>{peg.nama}</option>
+						{/each}
 					</select>
 				</div>
 			</div>
@@ -70,20 +85,16 @@
 					<p>Operasi & Pemeliharaan</p>
 				</div>
 				<ol class="list-group list-group-numbered list-group-flush mb-2">
-					<li class="list-group-item">Bahar Sudrajat</li>
-					<li class="list-group-item">Vecky Pandeirot</li>
-					<li class="list-group-item">Febriandy Mandagi</li>
-					<li class="list-group-item">Asep Kusmiadi</li>
-					<li class="list-group-item">Alan Nuari</li>
+					{#each ophar as oh}
+						<li class="list-group-item">{oh.nama}</li>
+					{/each}
 				</ol>
 				<div class="mx-2">
 					<select class="form-select form-select-sm" aria-label="Default select example">
 						<option selected>Pilih nama . . .</option>
-						<option value="1">Bahar Sudrajat</option>
-						<option value="2">Vecky Pandeirot</option>
-						<option value="3">Febriandy Mandagi</option>
-						<option value="4">Alan Nuari</option>
-						<option value="5">Asep Kusmiadi</option>
+						{#each ophar as oh}
+							<option value={oh.nama}>{oh.nama}</option>
+						{/each}
 					</select>
 				</div>
 			</div>
@@ -93,20 +104,16 @@
 					<p>Cleaning Service</p>
 				</div>
 				<ol class="list-group list-group-numbered list-group-flush mb-2">
-					<li class="list-group-item">Bahar Sudrajat</li>
-					<li class="list-group-item">Vecky Pandeirot</li>
-					<li class="list-group-item">Febriandy Mandagi</li>
-					<li class="list-group-item">Asep Kusmiadi</li>
-					<li class="list-group-item">Alan Nuari</li>
+					{#each cs as c}
+						<li class="list-group-item">{c.nama}</li>
+					{/each}
 				</ol>
 				<div class="mx-2">
 					<select class="form-select form-select-sm" aria-label="Default select example">
 						<option selected>Pilih nama . . .</option>
-						<option value="1">Bahar Sudrajat</option>
-						<option value="2">Vecky Pandeirot</option>
-						<option value="3">Febriandy Mandagi</option>
-						<option value="4">Alan Nuari</option>
-						<option value="5">Asep Kusmiadi</option>
+						{#each cs as c}
+							<option value={c.nama}>{c.nama}</option>
+						{/each}
 					</select>
 				</div>
 			</div>
@@ -116,20 +123,16 @@
 					<p>Security</p>
 				</div>
 				<ol class="list-group list-group-numbered list-group-flush mb-2">
-					<li class="list-group-item">Bahar Sudrajat</li>
-					<li class="list-group-item">Vecky Pandeirot</li>
-					<li class="list-group-item">Febriandy Mandagi</li>
-					<li class="list-group-item">Asep Kusmiadi</li>
-					<li class="list-group-item">Alan Nuari</li>
+					{#each security as sec}
+						<li class="list-group-item">{sec.nama}</li>
+					{/each}
 				</ol>
 				<div class="mx-2">
 					<select class="form-select form-select-sm" aria-label="Default select example">
 						<option selected>Pilih nama . . .</option>
-						<option value="1">Bahar Sudrajat</option>
-						<option value="2">Vecky Pandeirot</option>
-						<option value="3">Febriandy Mandagi</option>
-						<option value="4">Alan Nuari</option>
-						<option value="5">Asep Kusmiadi</option>
+						{#each security as sec}
+							<option value={sec.nama}>{sec.nama}</option>
+						{/each}
 					</select>
 				</div>
 			</div>
@@ -203,6 +206,10 @@
 								</tr>
 							</tbody>
 						</table>
+					</div>
+					<div>
+						<p>Laporan Gangguan/Service Request</p>
+						<input type="text" class="form-control form-control-sm" />
 					</div>
 				</div>
 			</div>
