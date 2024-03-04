@@ -22,6 +22,15 @@
 		</div>
 		<Absensi />
 	</div>
+	<div class="position-absolute bottom-0 start-0 mb-3 ms-3">
+		<h6 class="navbar-text owner me-4">Designed by <span>Alan Nuari</span></h6>
+		<div class="social">
+			<a href="/" class="github me-1"><i class="bi-github" /></a>
+			<a href="/" class="instagram me-1"><i class="bi-instagram" /></a>
+			<a href="/" class="twitter me-1"><i class="bi-twitter-x" /></a>
+			<a href="/" class="whatsapp me-1"><i class="bi-whatsapp" /></a>
+		</div>
+	</div>
 </div>
 
 <style>
@@ -48,5 +57,16 @@
 		font-size: 15px;
 		color: #2a9d8f;
 		border-radius: 0 15px 0 15px;
+	}
+	.owner {
+		margin: 0;
+		color: #ffffff;
+		font-size: 10px;
+	}
+	.owner span {
+		font-weight: 700;
+	}
+	.social a {
+		color: #ffffff;
 	}
 </style>

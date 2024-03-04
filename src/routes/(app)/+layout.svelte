@@ -1,8 +1,6 @@
 <script>
 	import Header from '../../lib/components/Header.svelte';
 	import Sidebar from '../../lib/components/Sidebar.svelte';
-	import Footer from '../../lib/components/Footer.svelte';
-	import bg from '../../lib/img/bg.jpg';
 </script>
 
 <svelte:head>
@@ -21,9 +19,6 @@
 			</div>
 			<div class="content px-5">
 				<slot />
-			</div>
-			<div class="position-absolute bottom-0 start-50 translate-middle-x">
-				<Footer />
 			</div>
 		</div>
 	</div>
@@ -44,6 +39,6 @@
 		overflow-x: hidden;
 		overflow-y: auto;
 		padding-top: 90px;
-		padding-bottom: 30px;
+		padding-bottom: 50px;
 	}
 </style>
