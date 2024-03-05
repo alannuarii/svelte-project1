@@ -1,6 +1,7 @@
 <script>
 	import { pegawai, ophar, cs, security, mesin, tp, th } from '../../../../lib/js/data';
-	import {generateRandomCode} from '../../../../lib/js/random'
+	import { generateRandomCode } from '../../../../lib/js/random';
+	import signature from '../../../../lib/img/signature.png';
 
 	let arrPegawai = [];
 	let arrOphar = [];
@@ -83,7 +84,13 @@
 					>ID NOTULEN</label
 				>
 				<div class="col-sm-5">
-					<input type="text" class="form-control form-control-sm" id="colFormLabelSm" value="{generateRandomCode()}" disabled />
+					<input
+						type="text"
+						class="form-control form-control-sm"
+						id="colFormLabelSm"
+						value={generateRandomCode()}
+						disabled
+					/>
 				</div>
 			</div>
 			<div class="row mb-1">
@@ -369,7 +376,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="px-3">
+		<div class="px-3 mb-4">
 			<h5>KEGIATAN</h5>
 			<table class="table table-bordered text-center">
 				<thead>
@@ -412,6 +419,16 @@
 					</tr>
 				</tbody>
 			</table>
+		</div>
+		<div class="row px-3 gx-0">
+			<div class="col-6">
+				<h1>tes</h1>
+			</div>
+			<div class="col-6 py-4 text-center border">
+				<p class="fw-bold">NOTULIS</p>
+				<img src={signature} class="img-fluid my-3" alt="" />
+				<div class="notulis"><input type="text" class="form-control form-control-sm text-center" placeholder="Nama Notulis" /></div>
+			</div>
 		</div>
 	</div>
 </div>
@@ -457,5 +474,12 @@
 	}
 	.namaKegiatan {
 		width: 50%;
+	}
+	.notulis {
+		margin-left: 150px;
+		margin-right: 150px;
+	}
+	img{
+		width: 10%;
 	}
 </style>
