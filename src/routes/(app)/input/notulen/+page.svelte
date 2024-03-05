@@ -2,6 +2,7 @@
 	import { pegawai, ophar, cs, security, mesin, tp, th } from '../../../../lib/js/data';
 	import { generateRandomCode } from '../../../../lib/js/random';
 	import signature from '../../../../lib/img/signature.png';
+	import Camera from '../../../../lib/components/modals/Camera.svelte';
 
 	let arrPegawai = [];
 	let arrOphar = [];
@@ -11,6 +12,7 @@
 	let formK3kl = [];
 	let formAdm = [];
 	let formKegiatan = [];
+	let capturedImage;
 
 	const handleArr = (event) => {
 		const selectedValue = event.target.value;
@@ -72,6 +74,14 @@
 		} else if (arrSecurity.find((sec) => nama === sec)) {
 			arrSecurity = arrSecurity.filter((element) => element !== nama);
 		}
+	};
+
+	const hapusFoto = () => {
+		capturedImage = '';
+	};
+
+	const handleImageCaptured = (event) => {
+		capturedImage = event.detail.capturedImage;
 	};
 </script>
 
@@ -283,7 +293,7 @@
 							</div>
 						{/each}
 						<div class="d-flex justify-content-center">
-							<div class="sr btn btn-sm btn-success" on:click={tambahForm}>
+							<div class="sr btn btn-sm" on:click={tambahForm}>
 								<i class="bi-plus-lg me-2"></i>Tambah
 							</div>
 						</div>
@@ -345,7 +355,7 @@
 						</div>
 					{/each}
 					<div class="d-flex justify-content-center">
-						<div class="k3kl btn btn-sm btn-success" on:click={tambahForm}>
+						<div class="k3kl btn btn-sm" on:click={tambahForm}>
 							<i class="bi-plus-lg me-2"></i>Tambah
 						</div>
 					</div>
@@ -369,7 +379,7 @@
 						</div>
 					{/each}
 					<div class="d-flex justify-content-center">
-						<div class="adm btn btn-sm btn-success" on:click={tambahForm}>
+						<div class="adm btn btn-sm" on:click={tambahForm}>
 							<i class="bi-plus-lg me-2"></i>Tambah
 						</div>
 					</div>
@@ -412,7 +422,7 @@
 					{/each}
 					<tr>
 						<td colspan="5"
-							><div class="kegiatan btn btn-sm btn-success" on:click={tambahForm}>
+							><div class="kegiatan btn btn-sm" on:click={tambahForm}>
 								<i class="bi-plus-lg me-2"></i>Tambah
 							</div></td
 						>
@@ -421,13 +431,33 @@
 			</table>
 		</div>
 		<div class="row px-3 gx-0">
-			<div class="col-6">
-				<h1>tes</h1>
+			<div class="col-6 border d-flex flex-column justify-content-center align-items-center py-3">
+				<button
+					class="{!!capturedImage
+						? 'd-none'
+						: ''} btn btn-sm d-flex flex-column justify-content-center align-items-center"
+					data-bs-toggle="modal"
+					data-bs-target="#camera"
+					><i class="bi-camera"></i><span class="dokumentasi">Dokumentasi</span></button
+				>
+				{#if capturedImage}
+					<img src={capturedImage} class="capture img-fluid my-2" alt="Captured Image" />
+					<i class="btn bi-x-circle-fill text-danger" on:click={hapusFoto}></i>
+				{/if}
+				<Camera on:imageCaptured={handleImageCaptured} />
 			</div>
-			<div class="col-6 py-4 text-center border">
-				<p class="fw-bold">NOTULIS</p>
-				<img src={signature} class="img-fluid my-3" alt="" />
-				<div class="notulis"><input type="text" class="form-control form-control-sm text-center" placeholder="Nama Notulis" /></div>
+			<div class="col-6 position-relative text-center border">
+				<div class="position-absolute top-50 start-50 translate-middle">
+					<p class="fw-bold">NOTULIS</p>
+					<img src={signature} class="signature img-fluid my-3" alt="" />
+					<div class="notulis">
+						<input
+							type="text"
+							class="form-control form-control-sm text-center"
+							placeholder="Nama Notulis"
+						/>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -437,6 +467,14 @@
 	.card {
 		border-radius: 20px;
 		/* border: none; */
+	}
+	.btn {
+		background-color: #2a9d8f;
+		color: #ffffff;
+		border: none;
+	}
+	.bi-x-circle-fill {
+		background-color: transparent;
 	}
 	h4,
 	h5,
@@ -475,11 +513,18 @@
 	.namaKegiatan {
 		width: 50%;
 	}
-	.notulis {
-		margin-left: 150px;
-		margin-right: 150px;
-	}
-	img{
+	.signature {
 		width: 10%;
+	}
+	.bi-camera {
+		font-size: 40px;
+	}
+	.dokumentasi {
+		margin: 0;
+		font-size: 10px;
+		/* margin-top: 100px; */
+	}
+	.capture {
+		width: 50%;
 	}
 </style>
