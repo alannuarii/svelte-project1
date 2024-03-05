@@ -1,5 +1,6 @@
 <script>
 	import { pegawai, ophar, cs, security, mesin, tp, th } from '../../../../lib/js/data';
+	import {generateRandomCode} from '../../../../lib/js/random'
 
 	let arrPegawai = [];
 	let arrOphar = [];
@@ -8,6 +9,7 @@
 	let formSr = [];
 	let formK3kl = [];
 	let formAdm = [];
+	let formKegiatan = [];
 
 	const handleArr = (event) => {
 		const selectedValue = event.target.value;
@@ -36,11 +38,27 @@
 
 		if (targetElement.classList.contains('sr')) {
 			formSr = [...formSr, {}];
+		} else if (targetElement.classList.contains('k3kl')) {
+			formK3kl = [...formK3kl, {}];
+		} else if (targetElement.classList.contains('adm')) {
+			formAdm = [...formAdm, {}];
+		} else if (targetElement.classList.contains('kegiatan')) {
+			formKegiatan = [...formKegiatan, {}];
 		}
 	};
 
-	const hapusForm = (index) => {
-		formSr = formSr.filter((_, i) => i !== index);
+	const hapusForm = (event, index) => {
+		const targetElement = event.target;
+
+		if (targetElement.classList.contains('delSr')) {
+			formSr = formSr.filter((_, i) => i !== index);
+		} else if (targetElement.classList.contains('delK3kl')) {
+			formK3kl = formK3kl.filter((_, i) => i !== index);
+		} else if (targetElement.classList.contains('delAdm')) {
+			formAdm = formAdm.filter((_, i) => i !== index);
+		} else if (targetElement.classList.contains('delKegiatan')) {
+			formKegiatan = formKegiatan.filter((_, i) => i !== index);
+		}
 	};
 
 	const hapusNama = (nama) => {
@@ -60,6 +78,14 @@
 	<div class="card p-3">
 		<h4 class="text-center mb-3">NOTULEN RAPAT</h4>
 		<div class="mx-4 mb-4">
+			<div class="row mb-1">
+				<label for="colFormLabelSm" class="col-sm-3 col-form-label col-form-label-sm"
+					>ID NOTULEN</label
+				>
+				<div class="col-sm-5">
+					<input type="text" class="form-control form-control-sm" id="colFormLabelSm" value="{generateRandomCode()}" disabled />
+				</div>
+			</div>
 			<div class="row mb-1">
 				<label for="colFormLabelSm" class="col-sm-3 col-form-label col-form-label-sm"
 					>HARI/TANGGAL</label
@@ -200,7 +226,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="px-3">
+		<div class="px-3 mb-4">
 			<h5>CATATAN DISKUSI</h5>
 			<div class="mb-3">
 				<h6 class="mb-2">1. BAGIAN OPERASI</h6>
@@ -234,11 +260,8 @@
 						</table>
 					</div>
 					<div class="mb-3">
-						<div class="d-flex align-items-center mb-2">
-							<p class="me-3">Laporan Gangguan/Service Request</p>
-							<div class="sr btn btn-sm btn-success" on:click={tambahForm}>
-								<i class="bi-plus-lg me-2"></i>Tambah
-							</div>
+						<div class="mb-2">
+							<p>Laporan Gangguan/Service Request</p>
 						</div>
 						{#each formSr as formSr, index}
 							<div class="d-flex align-items-center mb-1">
@@ -246,9 +269,17 @@
 									type="text"
 									class="form-control form-control-sm me-3"
 								/>
-								<i class="btn bi-x-circle-fill text-danger" on:click={() => hapusForm(index)}></i>
+								<i
+									class="delSr btn bi-x-circle-fill text-danger"
+									on:click={(event) => hapusForm(event, index)}
+								></i>
 							</div>
 						{/each}
+						<div class="d-flex justify-content-center">
+							<div class="sr btn btn-sm btn-success" on:click={tambahForm}>
+								<i class="bi-plus-lg me-2"></i>Tambah
+							</div>
+						</div>
 					</div>
 					<div>
 						<p class="mb-2">Informasi Tambahan</p>
@@ -287,22 +318,100 @@
 			</div>
 			<div class="mb-3">
 				<h6 class="mb-2">2. BAGIAN PEMELIHARAAN</h6>
+				<div class="card p-3"></div>
+			</div>
+			<div class="mb-3">
+				<div class="mb-2">
+					<h6 class="me-3">3. BAGIAN K3, LINGKUNGAN DAN KEAMANAN</h6>
+				</div>
 				<div class="card p-3">
-					{#each formSr as formSr, index}
+					{#each formK3kl as formK3kl, index}
 						<div class="d-flex align-items-center mb-1">
 							<span class="me-3">{index + 1}.</span><input
 								type="text"
 								class="form-control form-control-sm me-3"
 							/>
-							<i class="btn bi-x-circle-fill text-danger" on:click={() => hapusForm(index)}></i>
+							<i
+								class="delK3kl btn bi-x-circle-fill text-danger"
+								on:click={(event) => hapusForm(event, index)}
+							></i>
 						</div>
 					{/each}
+					<div class="d-flex justify-content-center">
+						<div class="k3kl btn btn-sm btn-success" on:click={tambahForm}>
+							<i class="bi-plus-lg me-2"></i>Tambah
+						</div>
+					</div>
 				</div>
 			</div>
 			<div class="mb-3">
-				<h6 class="mb-2">3. BAGIAN K3, LINGKUNGAN DAN KEAMANAN</h6>
-				<div class="card p-3"></div>
+				<div class="mb-2">
+					<h6 class="me-3">4. ADMINISTRASI DAN UMUM</h6>
+				</div>
+				<div class="card p-3">
+					{#each formAdm as formAdm, index}
+						<div class="d-flex align-items-center mb-1">
+							<span class="me-3">{index + 1}.</span><input
+								type="text"
+								class="form-control form-control-sm me-3"
+							/>
+							<i
+								class="delAdm btn bi-x-circle-fill text-danger"
+								on:click={(event) => hapusForm(event, index)}
+							></i>
+						</div>
+					{/each}
+					<div class="d-flex justify-content-center">
+						<div class="adm btn btn-sm btn-success" on:click={tambahForm}>
+							<i class="bi-plus-lg me-2"></i>Tambah
+						</div>
+					</div>
+				</div>
 			</div>
+		</div>
+		<div class="px-3">
+			<h5>KEGIATAN</h5>
+			<table class="table table-bordered text-center">
+				<thead>
+					<tr>
+						<th>No</th>
+						<th scope="col" class="namaKegiatan">Nama Kegiatan</th>
+						<th scope="col">PIC</th>
+						<th scope="col">Target</th>
+						<th>Action</th>
+					</tr>
+				</thead>
+				<tbody>
+					{#each formKegiatan as formKegiatan, index}
+						<tr>
+							<td class="align-middle">{index + 1}</td>
+							<td><input type="text" class="form-control form-control-sm" /></td>
+							<td
+								><select class="form-select form-select-sm" aria-label="Small select example">
+									<option selected disabled>Pilih PIC</option>
+									{#each pegawai.filter((item) => item.jabatan.includes('TL')) as peg}
+										<option value={peg.nama}>{peg.jabatan}</option>
+									{/each}
+								</select></td
+							>
+							<td><input type="date" class="form-control form-control-sm" /></td>
+							<td class="align-middle"
+								><i
+									class="delKegiatan btn bi-x-circle-fill text-danger"
+									on:click={(event) => hapusForm(event, index)}
+								></i></td
+							>
+						</tr>
+					{/each}
+					<tr>
+						<td colspan="5"
+							><div class="kegiatan btn btn-sm btn-success" on:click={tambahForm}>
+								<i class="bi-plus-lg me-2"></i>Tambah
+							</div></td
+						>
+					</tr>
+				</tbody>
+			</table>
 		</div>
 	</div>
 </div>
@@ -333,7 +442,8 @@
 	}
 	.list-group,
 	th,
-	td {
+	td,
+	span {
 		font-size: 13px;
 	}
 	.dmn {
@@ -344,5 +454,8 @@
 	}
 	.bi-x-circle-fill {
 		border: none;
+	}
+	.namaKegiatan {
+		width: 50%;
 	}
 </style>
