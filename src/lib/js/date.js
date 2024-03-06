@@ -1,59 +1,3 @@
-export const arrayDate = () => {
-	const tanggalHariIni = new Date();
-	const hariIni = tanggalHariIni.getDay();
-
-	if (hariIni === 0) {
-		const start = new Date(tanggalHariIni);
-		start.setDate(tanggalHariIni.getDate() - 2);
-		const end = new Date(tanggalHariIni);
-		end.setDate(tanggalHariIni.getDate() + 4);
-
-		return [date2(start), date2(end)];
-	} else if (hariIni === 1) {
-		const start = new Date(tanggalHariIni);
-		start.setDate(tanggalHariIni.getDate() - 3);
-		const end = new Date(tanggalHariIni);
-		end.setDate(tanggalHariIni.getDate() + 3);
-
-		return [date2(start), date2(end)];
-	} else if (hariIni === 2) {
-		const start = new Date(tanggalHariIni);
-		start.setDate(tanggalHariIni.getDate() - 4);
-		const end = new Date(tanggalHariIni);
-		end.setDate(tanggalHariIni.getDate() + 2);
-
-		return [date2(start), date2(end)];
-	} else if (hariIni === 3) {
-		const start = new Date(tanggalHariIni);
-		start.setDate(tanggalHariIni.getDate() - 5);
-		const end = new Date(tanggalHariIni);
-		end.setDate(tanggalHariIni.getDate() + 1);
-
-		return [date2(start), date2(end)];
-	} else if (hariIni === 4) {
-		const start = new Date(tanggalHariIni);
-		start.setDate(tanggalHariIni.getDate() - 6);
-		const end = new Date(tanggalHariIni);
-		end.setDate(tanggalHariIni.getDate() + 0);
-
-		return [date2(start), date2(end)];
-	} else if (hariIni === 5) {
-		const start = new Date(tanggalHariIni);
-		start.setDate(tanggalHariIni.getDate() - 0);
-		const end = new Date(tanggalHariIni);
-		end.setDate(tanggalHariIni.getDate() + 6);
-
-		return [date2(start), date2(end)];
-	} else if (hariIni === 6) {
-		const start = new Date(tanggalHariIni);
-		start.setDate(tanggalHariIni.getDate() - 1);
-		const end = new Date(tanggalHariIni);
-		end.setDate(tanggalHariIni.getDate() + 5);
-
-		return [date2(start), date2(end)];
-	}
-};
-
 export const formatTanggal = (tanggal) => {
 	const dd = String(tanggal.getDate()).padStart(2, '0');
 	const mm = String(tanggal.getMonth() + 1).padStart(2, '0');
@@ -165,31 +109,6 @@ export const date5 = (waktu) => {
 	return formattedTime;
 };
 
-export const getThreeDays = () => {
-	const currentDate = new Date();
-
-	// Buat array untuk menyimpan 3 tanggal terakhir, termasuk hari ini
-	let threeDaysArray = [];
-
-	// Loop untuk menghasilkan 3 tanggal terakhir, termasuk hari ini
-	for (let i = 0; i < 3; i++) {
-		// Dapatkan tahun, bulan, dan tanggal dalam bentuk YYYY-MM-DD
-		const year = currentDate.getFullYear();
-		const month = String(currentDate.getMonth() + 1).padStart(2, '0');
-		const day = String(currentDate.getDate()).padStart(2, '0');
-		const formattedDate = year + '-' + month + '-' + day;
-
-		// Tambahkan tanggal ke dalam array
-		threeDaysArray.push(formattedDate);
-
-		// Kurangkan 1 hari dari tanggal saat ini
-		currentDate.setDate(currentDate.getDate() - 1);
-	}
-
-	return threeDaysArray;
-	// [ '2023-11-04', '2023-11-03', '2023-11-02' ]
-};
-
 export const getTomorrow = () => {
 	const months = [
 		'Januari',
@@ -243,15 +162,3 @@ export function convertDate(tanggal) {
 	// 'Senin, 20 Februari 2023'
 }
 
-export const getBefore4Day = () => {
-	var dateArray = [];
-
-	for (let i = 0; i < 4; i++) {
-		let date = new Date();
-		date.setHours(date.getHours() + 8);
-		date.setDate(date.getDate() - i);
-		dateArray.push(date.toISOString().slice(0, 10));
-	}
-	return dateArray;
-	// [ '2023-05-09', '2023-05-08', '2023-05-07', '2023-05-06' ]
-};

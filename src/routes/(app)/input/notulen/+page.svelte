@@ -1,8 +1,9 @@
 <script>
 	import { pegawai, ophar, cs, security, mesin, tp, th } from '../../../../lib/js/data';
 	import { generateRandomCode } from '../../../../lib/js/random';
-	import signature from '../../../../lib/img/signature.png';
+	import { getToday } from '../../../../lib/js/date';
 	import Camera from '../../../../lib/components/modals/Camera.svelte';
+	import Qrcode from '../../../../lib/components/modals/Qrcode.svelte';
 
 	let arrPegawai = [];
 	let arrOphar = [];
@@ -13,6 +14,8 @@
 	let formAdm = [];
 	let formKegiatan = [];
 	let capturedImage;
+
+	const randomCode = generateRandomCode();
 
 	const handleArr = (event) => {
 		const selectedValue = event.target.value;
@@ -98,7 +101,7 @@
 						type="text"
 						class="form-control form-control-sm"
 						id="colFormLabelSm"
-						value={generateRandomCode()}
+						value={randomCode}
 						disabled
 					/>
 				</div>
@@ -108,19 +111,34 @@
 					>HARI/TANGGAL</label
 				>
 				<div class="col-sm-5">
-					<input type="date" class="form-control form-control-sm" id="colFormLabelSm" />
+					<input
+						type="date"
+						class="form-control form-control-sm"
+						id="colFormLabelSm"
+						value={getToday()}
+					/>
 				</div>
 			</div>
 			<div class="row mb-1">
 				<label for="colFormLabelSm" class="col-sm-3 col-form-label col-form-label-sm">TEMPAT</label>
 				<div class="col-sm-5">
-					<input type="text" class="form-control form-control-sm" id="colFormLabelSm" />
+					<input
+						type="text"
+						class="form-control form-control-sm"
+						id="colFormLabelSm"
+						value="Ruang Rapat ULPLTD Kotamobagu"
+					/>
 				</div>
 			</div>
 			<div class="row mb-1">
 				<label for="colFormLabelSm" class="col-sm-3 col-form-label col-form-label-sm">WAKTU</label>
 				<div class="col-sm-5">
-					<input type="time" class="form-control form-control-sm" id="colFormLabelSm" />
+					<input
+						type="time"
+						class="form-control form-control-sm"
+						id="colFormLabelSm"
+						value="08:30"
+					/>
 				</div>
 			</div>
 			<div class="row mb-1">
@@ -128,7 +146,7 @@
 					>AGENDA RAPAT</label
 				>
 				<div class="col-sm-5">
-					<input type="text" class="form-control form-control-sm" id="colFormLabelSm" />
+					<input type="text" class="form-control form-control-sm" id="colFormLabelSm" value="Daily Meeting" />
 				</div>
 			</div>
 			<div class="row">
@@ -136,7 +154,7 @@
 					>DASAR PEMBAHASAN</label
 				>
 				<div class="col-sm-5">
-					<input type="text" class="form-control form-control-sm" id="colFormLabelSm" />
+					<input type="text" class="form-control form-control-sm" id="colFormLabelSm" value="Implementasi Tata Kelola Pembangkit" />
 				</div>
 			</div>
 		</div>
@@ -432,24 +450,29 @@
 		</div>
 		<div class="row px-3 gx-0">
 			<div class="col-6 border d-flex flex-column justify-content-center align-items-center py-3">
-				<button
-					class="{!!capturedImage
-						? 'd-none'
-						: ''} btn btn-sm d-flex flex-column justify-content-center align-items-center"
-					data-bs-toggle="modal"
-					data-bs-target="#camera"
-					><i class="bi-camera"></i><span class="dokumentasi">Dokumentasi</span></button
-				>
+				<p class="fw-bold mb-3">DOKUMENTASI</p>
+				<div>
+					<button
+						class="{!!capturedImage ? 'd-none' : ''} btn btn-sm camera px-3"
+						data-bs-toggle="modal"
+						data-bs-target="#camera"><i class="bi-camera-fill"></i></button
+					>
+					<button
+						class="{!!capturedImage ? 'd-none' : ''} btn btn-sm camera px-3"
+						data-bs-toggle="modal"
+						data-bs-target="#qrcode"><i class="bi-qr-code"></i></button
+					>
+				</div>
 				{#if capturedImage}
 					<img src={capturedImage} class="capture img-fluid my-2" alt="Captured Image" />
 					<i class="btn bi-x-circle-fill text-danger" on:click={hapusFoto}></i>
 				{/if}
 				<Camera on:imageCaptured={handleImageCaptured} />
+				<Qrcode url={`http://10.7.177.188:5173/input/${randomCode}`} />
 			</div>
 			<div class="col-6 position-relative text-center border">
 				<div class="position-absolute top-50 start-50 translate-middle">
-					<p class="fw-bold">NOTULIS</p>
-					<img src={signature} class="signature img-fluid my-3" alt="" />
+					<p class="fw-bold mb-3">NOTULIS</p>
 					<div class="notulis">
 						<input
 							type="text"
@@ -513,16 +536,14 @@
 	.namaKegiatan {
 		width: 50%;
 	}
-	.signature {
-		width: 10%;
-	}
-	.bi-camera {
+	.bi-camera-fill,
+	.bi-qr-code {
 		font-size: 40px;
 	}
-	.dokumentasi {
-		margin: 0;
-		font-size: 10px;
-		/* margin-top: 100px; */
+	.camera {
+		background-color: rgba(42, 157, 144, 0.114);
+		color: #2a9d8f;
+		border-radius: 15px;
 	}
 	.capture {
 		width: 50%;

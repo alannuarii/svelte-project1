@@ -50,6 +50,7 @@
 <div
 	class="modal fade"
 	id="camera"
+	div
 	tabindex="-1"
 	aria-labelledby="exampleModalLabel"
 	aria-hidden="true"
@@ -100,7 +101,7 @@
 
 <style>
 	.modal-lg {
-		max-width: 700px;
+		max-width: 600px;
 	}
 	.btn {
 		width: 70px;
