@@ -8,5 +8,5 @@ export const generateRandomCode = () => {
         randomCode += characters.charAt(Math.floor(Math.random() * characters.length));
     }
 
-    return `NOTULEN-${randomCode}`;
+    return randomCode;
 }

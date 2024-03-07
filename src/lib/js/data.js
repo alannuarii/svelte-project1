@@ -43,12 +43,12 @@ export const security = [
 ]
 
 export const mesin = [
-    { nama: 'Daihatsu', tipe: '6PSHTc 26 Dm', seri: '6265146', dtp: 500 },
-    { nama: 'Daihatsu', tipe: '6PSHTc 26 D', seri: '6263607', dtp: 500 },
-    { nama: 'SWD', tipe: '8 FHD 240', seri: '70590-1', dtp: 1000 },
-    { nama: 'SWD', tipe: '8 FHD 240', seri: '70590-2', dtp: 1000 },
-    { nama: 'MAK', tipe: '8M 453 AK', seri: '26877', dtp: 2500 },
-    { nama: 'MAK', tipe: '8M 453 AK', seri: '26878', dtp: 2500 },
+    { unit: '1', nama: 'Daihatsu', tipe: '6PSHTc 26 Dm', seri: '6265146', dtp: 500 },
+    { unit: '2', nama: 'Daihatsu', tipe: '6PSHTc 26 D', seri: '6263607', dtp: 500 },
+    { unit: '3', nama: 'SWD', tipe: '8 FHD 240', seri: '70590-1', dtp: 1000 },
+    { unit: '4', nama: 'SWD', tipe: '8 FHD 240', seri: '70590-2', dtp: 1000 },
+    { unit: '5', nama: 'MAK', tipe: '8M 453 AK', seri: '26877', dtp: 2500 },
+    { unit: '6', nama: 'MAK', tipe: '8M 453 AK', seri: '26878', dtp: 2500 },
 ]
 
 export const tp = ['TP 1', 'TP 2', 'TP 3', 'TP 4', 'TP 5']
