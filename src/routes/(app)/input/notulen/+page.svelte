@@ -18,6 +18,7 @@
 	const randomCode = generateRandomCode();
 
 	const handleArr = (event) => {
+		event.preventDefault();
 		const selectedValue = event.target.value;
 		if (
 			!arrPegawai.includes(selectedValue) &&
@@ -40,6 +41,7 @@
 	};
 
 	const tambahForm = (event) => {
+		event.preventDefault();
 		const targetElement = event.target;
 
 		if (targetElement.classList.contains('sr')) {
@@ -54,6 +56,7 @@
 	};
 
 	const hapusForm = (event, index) => {
+		event.preventDefault();
 		const targetElement = event.target;
 
 		if (targetElement.classList.contains('delSr')) {
@@ -68,6 +71,7 @@
 	};
 
 	const hapusNama = (nama) => {
+		event.preventDefault();
 		if (arrPegawai.find((peg) => nama === peg)) {
 			arrPegawai = arrPegawai.filter((element) => element !== nama);
 		} else if (arrOphar.find((op) => nama === op)) {
@@ -84,12 +88,17 @@
 	};
 
 	const handleImageCaptured = (event) => {
+		event.preventDefault();
 		capturedImage = event.detail.capturedImage;
+	};
+
+	const handlePreventDafault = (event) => {
+		event.preventDefault();
 	};
 </script>
 
 <div>
-	<form method="POST" enctype="multipart/form-data">
+	<form method="post" enctype="multipart/form-data">
 		<div class="card p-3">
 			<h4 class="text-center mb-3">NOTULEN RAPAT</h4>
 			<div class="mx-4 mb-4">
@@ -105,6 +114,7 @@
 							value={randomCode}
 							disabled
 						/>
+						<input type="hidden" name="kode" value={randomCode} />
 					</div>
 				</div>
 				<div class="row mb-1">
@@ -116,6 +126,7 @@
 							type="date"
 							class="form-control form-control-sm"
 							id="colFormLabelSm"
+							name="tanggal"
 							value={getToday()}
 						/>
 					</div>
@@ -129,6 +140,7 @@
 							type="text"
 							class="form-control form-control-sm"
 							id="colFormLabelSm"
+							name="tempat"
 							value="Ruang Rapat ULPLTD Kotamobagu"
 						/>
 					</div>
@@ -141,6 +153,7 @@
 							type="time"
 							class="form-control form-control-sm"
 							id="colFormLabelSm"
+							name="waktu"
 							value="08:30"
 						/>
 					</div>
@@ -154,6 +167,7 @@
 							type="text"
 							class="form-control form-control-sm"
 							id="colFormLabelSm"
+							name="agenda"
 							value="Daily Meeting"
 						/>
 					</div>
@@ -167,6 +181,7 @@
 							type="text"
 							class="form-control form-control-sm"
 							id="colFormLabelSm"
+							name="dasar"
 							value="Implementasi Tata Kelola Pembangkit"
 						/>
 					</div>
@@ -183,8 +198,10 @@
 						<div class="d-flex align-items-center mx-3">
 							<span class="me-2">{index + 1}.</span>
 							<p class="">{peg}</p>
-							<i class="btn bi-x-circle-fill text-danger ms-auto" on:click={() => hapusNama(peg)}
-							></i>
+							<button
+								class="btn bi-x-circle-fill text-danger ms-auto"
+								on:click={() => hapusNama(peg)}
+							></button>
 						</div>
 					{/each}
 					<div class="mx-2 mt-2">
@@ -199,6 +216,7 @@
 							{/each}
 						</select>
 					</div>
+					<input type="hidden" name="namaPeg" value={arrPegawai} />
 				</div>
 				<div class="col-3 border py-2">
 					<div class="text-center mb-2">
@@ -209,8 +227,10 @@
 						<div class="d-flex align-items-center mx-3">
 							<span class="me-2">{index + 1}.</span>
 							<p class="">{op}</p>
-							<i class="btn bi-x-circle-fill text-danger ms-auto" on:click={() => hapusNama(op)}
-							></i>
+							<button
+								class="btn bi-x-circle-fill text-danger ms-auto"
+								on:click={() => hapusNama(op)}
+							></button>
 						</div>
 					{/each}
 					<div class="mx-2 mt-2">
@@ -225,6 +245,7 @@
 							{/each}
 						</select>
 					</div>
+					<input type="hidden" name="namaOH" value={arrOphar} />
 				</div>
 				<div class="col-3 border py-2">
 					<div class="text-center mb-2">
@@ -235,8 +256,10 @@
 						<div class="d-flex align-items-center mx-3">
 							<span class="me-2">{index + 1}.</span>
 							<p class="">{cs}</p>
-							<i class="btn bi-x-circle-fill text-danger ms-auto" on:click={() => hapusNama(cs)}
-							></i>
+							<button
+								class="btn bi-x-circle-fill text-danger ms-auto"
+								on:click={() => hapusNama(cs)}
+							></button>
 						</div>
 					{/each}
 					<div class="mx-2 mt-2">
@@ -251,6 +274,7 @@
 							{/each}
 						</select>
 					</div>
+					<input type="hidden" name="namaCs" value={arrCs} />
 				</div>
 				<div class="col-3 border py-2">
 					<div class="text-center mb-2">
@@ -261,8 +285,10 @@
 						<div class="d-flex align-items-center mx-3">
 							<span class="me-2">{index + 1}.</span>
 							<p class="">{sec}</p>
-							<i class="btn bi-x-circle-fill text-danger ms-auto" on:click={() => hapusNama(sec)}
-							></i>
+							<button
+								class="btn bi-x-circle-fill text-danger ms-auto"
+								on:click={() => hapusNama(sec)}
+							></button>
 						</div>
 					{/each}
 					<div class="mx-2 mt-2">
@@ -277,6 +303,7 @@
 							{/each}
 						</select>
 					</div>
+					<input type="hidden" name="namaSec" value={arrSecurity} />
 				</div>
 			</div>
 			<div class="px-3 mb-4">
@@ -305,9 +332,15 @@
 											<td class="align-middle">{mes.seri}</td>
 											<td class="align-middle">{mes.dtp}</td>
 											<td class="dmn"
-												><input type="number" class="form-control form-control-sm" /></td
+												><input type="number" class="form-control form-control-sm" name="dmn" /></td
 											>
-											<td><input type="text" class="form-control form-control-sm" /></td>
+											<td
+												><input
+													type="text"
+													class="form-control form-control-sm"
+													name="status"
+												/></td
+											>
 										</tr>
 									{/each}
 								</tbody>
@@ -323,16 +356,16 @@
 										type="text"
 										class="form-control form-control-sm me-3"
 									/>
-									<i
+									<button
 										class="delSr btn bi-x-circle-fill text-danger"
 										on:click={(event) => hapusForm(event, index)}
-									></i>
+									></button>
 								</div>
 							{/each}
 							<div class="d-flex justify-content-center">
-								<div class="sr btn btn-sm" on:click={tambahForm}>
+								<button class="sr btn btn-sm" on:click={tambahForm}>
 									<i class="bi-plus-lg me-2"></i>Tambah
-								</div>
+								</button>
 							</div>
 						</div>
 						<div>
@@ -345,7 +378,11 @@
 												<tr>
 													<td class="align-middle">{t}</td>
 													<td class="tangki"
-														><input type="number" class="form-control form-control-sm" /></td
+														><input
+															type="number"
+															class="form-control form-control-sm"
+															name="tp"
+														/></td
 													>
 												</tr>
 											{/each}
@@ -359,7 +396,11 @@
 												<tr>
 													<td class="align-middle">{t}</td>
 													<td class="tangki"
-														><input type="number" class="form-control form-control-sm" /></td
+														><input
+															type="number"
+															class="form-control form-control-sm"
+															name="th"
+														/></td
 													>
 												</tr>
 											{/each}
@@ -384,17 +425,18 @@
 								<span class="me-3">{index + 1}.</span><input
 									type="text"
 									class="form-control form-control-sm me-3"
+									name="k3kl"
 								/>
-								<i
+								<button
 									class="delK3kl btn bi-x-circle-fill text-danger"
 									on:click={(event) => hapusForm(event, index)}
-								></i>
+								></button>
 							</div>
 						{/each}
 						<div class="d-flex justify-content-center">
-							<div class="k3kl btn btn-sm" on:click={tambahForm}>
+							<button class="k3kl btn btn-sm" on:click={tambahForm}>
 								<i class="bi-plus-lg me-2"></i>Tambah
-							</div>
+							</button>
 						</div>
 					</div>
 				</div>
@@ -408,17 +450,18 @@
 								<span class="me-3">{index + 1}.</span><input
 									type="text"
 									class="form-control form-control-sm me-3"
+									name="adm"
 								/>
-								<i
+								<button
 									class="delAdm btn bi-x-circle-fill text-danger"
 									on:click={(event) => hapusForm(event, index)}
-								></i>
+								></button>
 							</div>
 						{/each}
 						<div class="d-flex justify-content-center">
-							<div class="adm btn btn-sm" on:click={tambahForm}>
+							<button class="adm btn btn-sm" on:click={tambahForm}>
 								<i class="bi-plus-lg me-2"></i>Tambah
-							</div>
+							</button>
 						</div>
 					</div>
 				</div>
@@ -439,29 +482,33 @@
 						{#each formKegiatan as formKegiatan, index}
 							<tr>
 								<td class="align-middle">{index + 1}</td>
-								<td><input type="text" class="form-control form-control-sm" /></td>
+								<td><input type="text" class="form-control form-control-sm" name="kegiatan" /></td>
 								<td
-									><select class="form-select form-select-sm" aria-label="Small select example">
+									><select
+										class="form-select form-select-sm"
+										aria-label="Small select example"
+										name="pic"
+									>
 										<option selected disabled>Pilih PIC</option>
 										{#each pegawai.filter((item) => item.jabatan.includes('TL')) as peg}
 											<option value={peg.nama}>{peg.jabatan}</option>
 										{/each}
 									</select></td
 								>
-								<td><input type="date" class="form-control form-control-sm" /></td>
+								<td><input type="date" class="form-control form-control-sm" name="target" /></td>
 								<td class="align-middle"
-									><i
+									><button
 										class="delKegiatan btn bi-x-circle-fill text-danger"
 										on:click={(event) => hapusForm(event, index)}
-									></i></td
+									></button></td
 								>
 							</tr>
 						{/each}
 						<tr>
 							<td colspan="5"
-								><div class="kegiatan btn btn-sm" on:click={tambahForm}>
+								><button class="kegiatan btn btn-sm" on:click={tambahForm}>
 									<i class="bi-plus-lg me-2"></i>Tambah
-								</div></td
+								</button></td
 							>
 						</tr>
 					</tbody>
@@ -474,17 +521,24 @@
 						<button
 							class="{!!capturedImage ? 'd-none' : ''} btn btn-sm camera px-3"
 							data-bs-toggle="modal"
-							data-bs-target="#camera"><i class="bi-camera-fill"></i></button
+							data-bs-target="#camera"
+							on:click={handlePreventDafault}><i class="bi-camera-fill"></i></button
 						>
+						<input type="hidden" name="foto" value={capturedImage} />
 						<button
 							class="{!!capturedImage ? 'd-none' : ''} btn btn-sm camera px-3"
 							data-bs-toggle="modal"
-							data-bs-target="#qrcode"><i class="bi-qr-code"></i></button
+							data-bs-target="#qrcode"
+							on:click={handlePreventDafault}><i class="bi-qr-code"></i></button
 						>
 					</div>
 					{#if capturedImage}
-						<img src={capturedImage} class="capture img-fluid my-2" alt="Captured Image" />
-						<i class="btn bi-x-circle-fill text-danger" on:click={hapusFoto}></i>
+						<img
+							src={capturedImage}
+							class="capture img-fluid my-2"
+							alt="Dokumentasi Daily Meeting"
+						/>
+						<button class="btn bi-x-circle-fill text-danger" on:click={hapusFoto}></button>
 					{/if}
 					<Camera on:imageCaptured={handleImageCaptured} />
 					<Qrcode url={`http://10.7.177.188:5173/input/${randomCode}`} />
@@ -497,6 +551,7 @@
 								type="text"
 								class="form-control form-control-sm text-center"
 								placeholder="Nama Notulis"
+								name="notulis"
 							/>
 						</div>
 					</div>
