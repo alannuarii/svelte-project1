@@ -379,7 +379,7 @@
 													<td class="align-middle">{t}</td>
 													<td class="tangki"
 														><input
-															type="number"
+															type="text"
 															class="form-control form-control-sm"
 															name="tp"
 														/></td
@@ -397,7 +397,7 @@
 													<td class="align-middle">{t}</td>
 													<td class="tangki"
 														><input
-															type="number"
+															type="text"
 															class="form-control form-control-sm"
 															name="th"
 														/></td
