@@ -98,7 +98,7 @@
 </script>
 
 <div>
-	<form method="post" enctype="multipart/form-data">
+	<form method="POST">
 		<div class="card p-3">
 			<h4 class="text-center mb-3">NOTULEN RAPAT</h4>
 			<div class="mx-4 mb-4">

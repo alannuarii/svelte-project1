@@ -18,7 +18,6 @@ export const actions = {
         formData.append('namaOH', data.get('namaOH'))
         formData.append('namaCs', data.get('namaCs'))
         formData.append('namaSec', data.get('namaSec'))
-        formData.append('status', data.get('status'))
 
         const arrDmn = []
         const arrStatus = []
@@ -65,11 +64,11 @@ export const actions = {
         console.log(formData)
 
 
-        // const res = await fetch(`${API_ENDPOINT}/api/activity`, {
-        //     method: 'POST',
-        //     body: formData
-        // });
+        const res = await fetch(`${API_ENDPOINT}/api/notulen`, {
+            method: 'POST',
+            body: formData
+        });
 
-        // return res.json();
+        return res.json();
     }
 };

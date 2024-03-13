@@ -8,8 +8,9 @@
 
 	const dispatch = createEventDispatcher();
 
-	async function startCamera() {
+	async function startCamera(event) {
 		try {
+			event.preventDefault();
 			videoStream = await navigator.mediaDevices.getUserMedia({ video: true });
 			videoElement = document.getElementById('videoElement');
 			videoElement.srcObject = videoStream;
@@ -23,13 +24,15 @@
 		}
 	}
 
-	function stopCamera() {
+	function stopCamera(event) {
+		event.preventDefault();
 		if (videoStream) {
 			videoStream.getTracks().forEach((track) => track.stop());
 		}
 	}
 
-	function captureImage() {
+	function captureImage(event) {
+		event.preventDefault();
 		const canvas = document.createElement('canvas');
 		const context = canvas.getContext('2d');
 		// Set canvas size equal to video size
@@ -41,7 +44,8 @@
 		dispatch('imageCaptured', { capturedImage });
 	}
 
-	function resetCapture() {
+	function resetCapture(event) {
+		event.preventDefault();
 		capturedImage = null;
 		capturing = false;
 	}
@@ -60,10 +64,11 @@
 			<div class="modal-body position-relative">
 				<div class="d-flex flex-column">
 					<video id="videoElement" autoplay style="display: {!capturing ? 'block' : 'none'};"
-					></video>
+						><track kind="captions" /></video
+					>
 
 					{#if capturing}
-						<img src={capturedImage} alt="Captured Image" />
+						<img src={capturedImage} alt="Dokumentasi Daily Meeting" />
 					{/if}
 					<div class="nav d-flex justify-content-center mt-3">
 						<button
