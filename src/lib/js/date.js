@@ -109,6 +109,25 @@ export const date5 = (waktu) => {
 	return formattedTime;
 };
 
+export const date6 = (tanggal) => {
+	// Tanggal dalam format ISO 8601
+	let dateString = tanggal
+	// Membuat objek Date dari string tanggal
+	let date = new Date(dateString);
+
+	// Mendapatkan tahun, bulan, dan tanggal
+	let year = date.getFullYear();
+	let month = String(date.getMonth() + 1).padStart(2, '0'); // Ditambah 1 karena Januari dimulai dari 0
+	let day = String(date.getDate()).padStart(2, '0');
+
+	// Menggabungkan tahun, bulan, dan tanggal menjadi format YYYY-MM-DD
+	let formattedDate = `${year}-${month}-${day}`;
+
+	return formattedDate
+	// Convert 2024-03-14T00:00:00Z to 2024-03-14
+
+}
+
 export const getTomorrow = () => {
 	const months = [
 		'Januari',

@@ -61,9 +61,6 @@ export const actions = {
         formData.append('pic', arrPic)
         formData.append('target', arrTarget)
 
-        console.log(formData)
-
-
         const res = await fetch(`${API_ENDPOINT}/api/notulen`, {
             method: 'POST',
             body: formData
@@ -71,4 +68,13 @@ export const actions = {
 
         return res.json();
     }
+};
+
+export const load = async () => {
+    const res = await fetch(`${API_ENDPOINT}/api/notulen`);
+    const data = await res.json();
+
+    return {
+        data: data,
+    };
 };

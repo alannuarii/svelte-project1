@@ -1,10 +1,11 @@
 <script>
-	import { pegawai, ophar, cs, security, mesin, tp, th } from '../../../../lib/js/data';
+	import { pegawai, ophar, cs, security } from '../../../../lib/js/data';
 	import { generateRandomCode } from '../../../../lib/js/random';
-	import { getToday } from '../../../../lib/js/date';
+	import { getToday, date6 } from '../../../../lib/js/date';
 	import Camera from '../../../../lib/components/modals/Camera.svelte';
 	import Qrcode from '../../../../lib/components/modals/Qrcode.svelte';
 
+	export let data;
 	let arrPegawai = [];
 	let arrOphar = [];
 	let arrCs = [];
@@ -14,8 +15,34 @@
 	let formAdm = [];
 	let formKegiatan = [];
 	let capturedImage;
-
 	const randomCode = generateRandomCode();
+	const daftarHadir = data.data.data.daftar_hadir.length > 0 ? data.data.data.daftar_hadir : [];
+	const pembangkit = data.data.data.pembangkit.length > 0 ? data.data.data.pembangkit : [];
+	const tp = data.data.data.tp.length > 0 ? data.data.data.tp : [];
+	const th = data.data.data.th.length > 0 ? data.data.data.th : [];
+	const k3kl = data.data.data.k3kl.length > 0 ? data.data.data.k3kl : [];
+	const adm = data.data.data.adm.length > 0 ? data.data.data.adm : [];
+	const kegiatan = data.data.data.kegiatan.length > 0 ? data.data.data.kegiatan : [];
+
+	$: {
+		arrPegawai = daftarHadir
+			.filter((item) => item.Instansi === 'PLN Nusantara Power')
+			.map((item) => item.Nama);
+
+		arrOphar = daftarHadir
+			.filter((item) => item.Instansi === 'PLN Nusa Daya')
+			.map((item) => item.Nama);
+
+		arrCs = daftarHadir.filter((item) => item.Instansi === 'Carefast').map((item) => item.Nama);
+
+		arrSecurity = daftarHadir.filter((item) => item.Instansi === 'JSS').map((item) => item.Nama);
+
+		formK3kl = k3kl.map((item) => item);
+
+		formAdm = adm.map((item) => item);
+
+		formKegiatan = kegiatan.map((item) => item);
+	}
 
 	const handleArr = (event) => {
 		event.preventDefault();
@@ -325,20 +352,26 @@
 									</tr>
 								</thead>
 								<tbody>
-									{#each mesin as mes}
+									{#each pembangkit as mes}
 										<tr>
-											<td class="align-middle">{mes.nama}</td>
-											<td class="align-middle">{mes.tipe}</td>
-											<td class="align-middle">{mes.seri}</td>
-											<td class="align-middle">{mes.dtp}</td>
+											<td class="align-middle">{mes.Mesin}</td>
+											<td class="align-middle">{mes.Tipe}</td>
+											<td class="align-middle">{mes.Seri}</td>
+											<td class="align-middle">{mes.DTP}</td>
 											<td class="dmn"
-												><input type="number" class="form-control form-control-sm" name="dmn" /></td
+												><input
+													type="number"
+													class="form-control form-control-sm"
+													name="dmn"
+													value={mes.DMN}
+												/></td
 											>
 											<td
 												><input
 													type="text"
-													class="form-control form-control-sm"
+													class="form-control form-control-sm text-center"
 													name="status"
+													value={mes.Status}
 												/></td
 											>
 										</tr>
@@ -376,12 +409,13 @@
 										<tbody>
 											{#each tp as t}
 												<tr>
-													<td class="align-middle">{t}</td>
+													<td class="align-middle">{t.KodeTangki}</td>
 													<td class="tangki"
 														><input
 															type="text"
 															class="form-control form-control-sm"
 															name="tp"
+															value={(+t.Pengukuran).toFixed(2)}
 														/></td
 													>
 												</tr>
@@ -394,12 +428,13 @@
 										<tbody>
 											{#each th as t}
 												<tr>
-													<td class="align-middle">{t}</td>
+													<td class="align-middle">{t.KodeTangki}</td>
 													<td class="tangki"
 														><input
 															type="text"
 															class="form-control form-control-sm"
 															name="th"
+															value={(+t.Pengukuran).toFixed(2)}
 														/></td
 													>
 												</tr>
@@ -420,12 +455,13 @@
 						<h6 class="me-3">3. BAGIAN K3, LINGKUNGAN DAN KEAMANAN</h6>
 					</div>
 					<div class="card p-3">
-						{#each formK3kl as formK3kl, index}
+						{#each formK3kl as fk3kl, index}
 							<div class="d-flex align-items-center mb-1">
 								<span class="me-3">{index + 1}.</span><input
 									type="text"
 									class="form-control form-control-sm me-3"
 									name="k3kl"
+									value={fk3kl.Info}
 								/>
 								<button
 									class="delK3kl btn bi-x-circle-fill text-danger"
@@ -445,12 +481,13 @@
 						<h6 class="me-3">4. ADMINISTRASI DAN UMUM</h6>
 					</div>
 					<div class="card p-3">
-						{#each formAdm as formAdm, index}
+						{#each formAdm as fadm, index}
 							<div class="d-flex align-items-center mb-1">
 								<span class="me-3">{index + 1}.</span><input
 									type="text"
 									class="form-control form-control-sm me-3"
 									name="adm"
+									value={fadm.Info}
 								/>
 								<button
 									class="delAdm btn bi-x-circle-fill text-danger"
@@ -479,23 +516,37 @@
 						</tr>
 					</thead>
 					<tbody>
-						{#each formKegiatan as formKegiatan, index}
+						{#each formKegiatan as fkegiatan, index}
 							<tr>
 								<td class="align-middle">{index + 1}</td>
-								<td><input type="text" class="form-control form-control-sm" name="kegiatan" /></td>
+								<td
+									><input
+										type="text"
+										class="form-control form-control-sm"
+										name="kegiatan"
+										value={fkegiatan.NamaKegiatan}
+									/></td
+								>
 								<td
 									><select
 										class="form-select form-select-sm"
 										aria-label="Small select example"
 										name="pic"
 									>
-										<option selected disabled>Pilih PIC</option>
+										<option selected value={fkegiatan.PIC}>{fkegiatan.PIC}</option>
 										{#each pegawai.filter((item) => item.jabatan.includes('TL')) as peg}
-											<option value={peg.nama}>{peg.jabatan}</option>
+											<option value={peg.jabatan}>{peg.jabatan}</option>
 										{/each}
 									</select></td
 								>
-								<td><input type="date" class="form-control form-control-sm" name="target" /></td>
+								<td
+									><input
+										type="date"
+										class="form-control form-control-sm"
+										name="target"
+										value={date6(fkegiatan.Target)}
+									/></td
+								>
 								<td class="align-middle"
 									><button
 										class="delKegiatan btn bi-x-circle-fill text-danger"
@@ -552,6 +603,7 @@
 								class="form-control form-control-sm text-center"
 								placeholder="Nama Notulis"
 								name="notulis"
+								value={data.data.data.agenda[0].Notulis}
 							/>
 						</div>
 					</div>
