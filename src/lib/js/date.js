@@ -181,3 +181,26 @@ export function convertDate(tanggal) {
 	// 'Senin, 20 Februari 2023'
 }
 
+export const getNextDay = (inputDate) => {
+	// Mengonversi input tanggal ke objek JavaScript Date
+	let date = new Date(inputDate);
+
+	// Menambahkan satu hari
+	date.setDate(date.getDate() + 1);
+
+	// Memeriksa apakah tanggal jatuh pada hari Sabtu atau Minggu
+	while (date.getDay() === 0 || date.getDay() === 6) {
+		// Jika ya, tambahkan satu hari lagi
+		date.setDate(date.getDate() + 1);
+	}
+
+	// Format hasil sesuai dengan format yang diminta (14 Maret 2024)
+	const months = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+	const day = date.getDate();
+	const month = months[date.getMonth()];
+	const year = date.getFullYear();
+
+	return `${day} ${month} ${year}`;
+	// 18 Maret 2024
+}
+
