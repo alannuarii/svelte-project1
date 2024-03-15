@@ -26,9 +26,6 @@
 	const adm = data.data.data.adm.length > 0 ? data.data.data.adm : [];
 	const kegiatan = data.data.data.kegiatan.length > 0 ? data.data.data.kegiatan : [];
 
-	console.log(tanggal === getToday());
-	console.log(getToday());
-
 	$: {
 		arrPegawai = daftarHadir
 			.filter((item) => item.Instansi === 'PLN Nusantara Power')
@@ -705,6 +702,7 @@
 	.alert {
 		margin: 70px 300px;
 		background-color: rgba(42, 157, 144, 0.114);
+		border-radius: 20px;
 	}
 	.alert span {
 		font-weight: 700;
