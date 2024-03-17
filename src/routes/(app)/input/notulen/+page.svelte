@@ -4,8 +4,11 @@
 	import { getToday, date6, getNextDay } from '../../../../lib/js/date';
 	import Camera from '../../../../lib/components/modals/Camera.svelte';
 	import Qrcode from '../../../../lib/components/modals/Qrcode.svelte';
+	import Alert from '../../../../lib/components/Alert.svelte';
 
 	export let data;
+	export let form;
+
 	let arrPegawai = [];
 	let arrOphar = [];
 	let arrCs = [];
@@ -16,6 +19,7 @@
 	let formKegiatan = [];
 	let capturedImage;
 	const randomCode = generateRandomCode();
+	const response = form === null ? data.data.message : form.message;
 	const tanggal =
 		data.data.data.agenda.length > 0 ? date6(data.data.data.agenda[0].Tanggal) : getToday();
 	const daftarHadir = data.data.data.daftar_hadir.length > 0 ? data.data.data.daftar_hadir : [];
@@ -127,6 +131,9 @@
 </script>
 
 <div>
+	{#if response !== 'Sukses'}
+		<Alert message={response} color="success" icon="check-circle" />
+	{/if}
 	{#if tanggal === getToday()}
 		<div class="alert alert-success p-4" role="alert">
 			<h4 class="alert-heading">Well done!</h4>
@@ -134,7 +141,7 @@
 				Daily meeting hari ini telah dilaksanakan, silahkan klik link di bawah ini untuk melihat
 				notulen hari ini.
 			</p>
-			<button class="btn btn-sm mt-2">Notulen</button>
+			<a href="/detail/{data.data.data.agenda[0].Kode}" class="btn btn-sm mt-2">Notulen</a>
 			<hr />
 			<p class="mb-0">
 				Daily meeting selanjutnya dilaksanakan pada tanggal <span>{getNextDay(getToday())}</span>
@@ -143,7 +150,7 @@
 	{:else}
 		<form method="POST">
 			<div class="card p-3">
-				<h4 class="text-center mb-3">NOTULEN RAPAT</h4>
+				<h4 class="text-center mb-3">FORM NOTULEN RAPAT</h4>
 				<div class="mx-4 mb-4">
 					<div class="row mb-1">
 						<label for="colFormLabelSm" class="col-sm-3 col-form-label col-form-label-sm"

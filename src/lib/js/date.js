@@ -181,6 +181,30 @@ export function convertDate(tanggal) {
 	// 'Senin, 20 Februari 2023'
 }
 
+export const convertTime = (waktu) => {
+
+	// Mengambil jam dan menit dari string ISO
+	const hoursMinutes = waktu.slice(11, 16);
+
+	// Parsing jam dan menit
+	const hours = parseInt(hoursMinutes.slice(0, 2), 10);
+	const minutes = parseInt(hoursMinutes.slice(3, 5), 10);
+
+	// Menentukan AM atau PM
+	const ampm = hours >= 12 ? 'PM' : 'AM';
+
+	// Format jam 12-jam dengan 12:00 PM
+	const formattedHours = hours % 12 === 0 ? 12 : hours % 12;
+
+	// Mengonversi menit menjadi dua digit
+	const formattedMinutes = minutes < 10 ? '0' + minutes : minutes;
+
+	// Menggabungkan jam, menit, dan AM/PM menjadi string yang diformat
+	return formattedHours + ':' + formattedMinutes + ' ' + ampm;
+
+	// Convert 0000-01-01T08:30:00Z to 08:30 AM 
+}
+
 export const getNextDay = (inputDate) => {
 	// Mengonversi input tanggal ke objek JavaScript Date
 	let date = new Date(inputDate);

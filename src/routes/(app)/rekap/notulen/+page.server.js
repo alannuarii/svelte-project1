@@ -19,13 +19,18 @@ export const actions = {
         formData.append('kode', data.get('kode'));
         formData.append('foto', data.get('foto'));
 
-        console.log(formData)
-
-        const res = await fetch(`${API_ENDPOINT}/api/fotonotulen`, {
-            method: 'PUT',
-            body: formData
-        });
-
-        return res.json();
+        if (data.get('method') === 'put') {
+            const res = await fetch(`${API_ENDPOINT}/api/fotonotulen`, {
+                method: 'PUT',
+                body: formData
+            });
+            return res.json();
+        } else {
+            const res = await fetch(`${API_ENDPOINT}/api/notulen`, {
+                method: 'DELETE',
+                body: formData
+            });
+            return res.json();
+        }
     }
 };

@@ -2,13 +2,20 @@
 	import { date, date2 } from '../../../../lib/js/date';
 	import DeleteNotulen from '../../../../lib/components/modals/DeleteNotulen.svelte';
 	import UploadFoto from '../../../../lib/components/modals/UploadFoto.svelte';
+	import Alert from '../../../../lib/components/Alert.svelte';
 
 	export let data;
+	export let form;
+
+	const response = form === null ? data.data.message : form.message;
 
 	const allNotulen = data.data.data.length > 0 ? data.data.data : [];
 </script>
 
 <div>
+	{#if response !== 'Sukses'}
+		<Alert message={response} color="success" icon="check-circle" />
+	{/if}
 	<div class="card p-3">
 		<h4 class="text-center mb-3">REKAP DOKUMEN NOTULEN</h4>
 		<div class="mx-4">
@@ -30,7 +37,10 @@
 					{#each allNotulen as not, index}
 						<tr>
 							<td class="align-middle">{index + 1}</td>
-							<td class="align-middle">{date(not.Tanggal)}</td>
+							<td class="align-middle"
+								><a href="/detail/{not.Kode}" class="text-decoration-none">{date(not.Tanggal)}</a
+								></td
+							>
 							<td class="align-middle"><i class="bi-check-circle text-success"></i></td>
 							<td class="align-middle"><i class="bi-check-circle text-success"></i></td>
 							<td class="align-middle"
@@ -50,9 +60,9 @@
 								<button
 									class="btn bi-trash3-fill text-danger"
 									data-bs-toggle="modal"
-									data-bs-target="#deleteNotulen"
+									data-bs-target="#deleteNotulen{not.Kode}"
 								></button>
-								<DeleteNotulen id={not.ID} tanggal={date2(not.Tanggal)} />
+								<DeleteNotulen kode={not.Kode} tanggal={date2(not.Tanggal)} />
 							</td>
 						</tr>
 					{/each}

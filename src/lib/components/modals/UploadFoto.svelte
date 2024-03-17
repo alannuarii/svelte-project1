@@ -23,6 +23,7 @@
 					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
 
 					<input type="hidden" name="kode" value={kode} />
+					<input type="hidden" name="method" value="put" />
 					<button type="submit" class="btn upload">Upload</button>
 				</div>
 			</form>

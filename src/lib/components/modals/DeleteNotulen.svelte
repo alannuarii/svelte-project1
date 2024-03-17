@@ -1,11 +1,11 @@
 <script>
-	export let id;
+	export let kode;
 	export let tanggal;
 </script>
 
 <div
 	class="modal fade"
-	id="deleteNotulen"
+	id="deleteNotulen{kode}"
 	tabindex="-1"
 	aria-labelledby="exampleModalLabel"
 	aria-hidden="true"
@@ -21,7 +21,8 @@
 			<div class="modal-footer d-flex justify-content-center">
 				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
 				<form method="POST">
-					<input type="hidden" name="id" value={id} />
+					<input type="hidden" name="kode" value={kode} />
+					<input type="hidden" name="method" value="delete" />
 					<button type="submit" class="btn btn-danger">Ya!</button>
 				</form>
 			</div>
