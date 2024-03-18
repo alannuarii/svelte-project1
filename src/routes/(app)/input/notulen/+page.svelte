@@ -1,5 +1,5 @@
 <script>
-	import { pegawai, ophar, cs, security } from '../../../../lib/js/data';
+	import { pegawai, ophar, cs, security, mesin, bbmTp, bbmTh } from '../../../../lib/js/data';
 	import { generateRandomCode } from '../../../../lib/js/random';
 	import { getToday, date6, getNextDay } from '../../../../lib/js/date';
 	import Camera from '../../../../lib/components/modals/Camera.svelte';
@@ -23,12 +23,14 @@
 	const tanggal =
 		data.data.data.agenda.length > 0 ? date6(data.data.data.agenda[0].Tanggal) : getToday();
 	const daftarHadir = data.data.data.daftar_hadir.length > 0 ? data.data.data.daftar_hadir : [];
-	const pembangkit = data.data.data.pembangkit.length > 0 ? data.data.data.pembangkit : [];
-	const tp = data.data.data.tp.length > 0 ? data.data.data.tp : [];
-	const th = data.data.data.th.length > 0 ? data.data.data.th : [];
+	const pembangkit = data.data.data.pembangkit.length > 0 ? data.data.data.pembangkit : mesin;
+	const tp = data.data.data.tp.length > 0 ? data.data.data.tp : bbmTp;
+	const th = data.data.data.th.length > 0 ? data.data.data.th : bbmTh;
 	const k3kl = data.data.data.k3kl.length > 0 ? data.data.data.k3kl : [];
 	const adm = data.data.data.adm.length > 0 ? data.data.data.adm : [];
 	const kegiatan = data.data.data.kegiatan.length > 0 ? data.data.data.kegiatan : [];
+
+	console.log(pembangkit);
 
 	$: {
 		arrPegawai = daftarHadir
@@ -439,7 +441,7 @@
 																type="text"
 																class="form-control form-control-sm"
 																name="tp"
-																value={(+t.Pengukuran).toFixed(2)}
+																value={!!t.Pengukuran ? (+t.Pengukuran).toFixed(2) : ""}
 															/></td
 														>
 													</tr>
@@ -458,7 +460,7 @@
 																type="text"
 																class="form-control form-control-sm"
 																name="th"
-																value={(+t.Pengukuran).toFixed(2)}
+																value={!!t.Pengukuran ? (+t.Pengukuran).toFixed(2) : ""}
 															/></td
 														>
 													</tr>

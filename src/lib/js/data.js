@@ -43,15 +43,24 @@ export const security = [
 ]
 
 export const mesin = [
-    { unit: '1', nama: 'Daihatsu', tipe: '6PSHTc 26 Dm', seri: '6265146', dtp: 500 },
-    { unit: '2', nama: 'Daihatsu', tipe: '6PSHTc 26 D', seri: '6263607', dtp: 500 },
-    { unit: '3', nama: 'SWD', tipe: '8 FHD 240', seri: '70590-1', dtp: 1000 },
-    { unit: '4', nama: 'SWD', tipe: '8 FHD 240', seri: '70590-2', dtp: 1000 },
-    { unit: '5', nama: 'MAK', tipe: '8M 453 AK', seri: '26877', dtp: 2500 },
-    { unit: '6', nama: 'MAK', tipe: '8M 453 AK', seri: '26878', dtp: 2500 },
+    { Unit: '1', Mesin: 'Daihatsu', Tipe: '6PSHTc 26 Dm', Seri: '6265146', DTP: 500 },
+    { Unit: '2', Mesin: 'Daihatsu', Tipe: '6PSHTc 26 D', Seri: '6263607', DTP: 500 },
+    { Unit: '3', Mesin: 'SWD', Tipe: '8 FHD 240', Seri: '70590-1', DTP: 1000 },
+    { Unit: '4', Mesin: 'SWD', Tipe: '8 FHD 240', Seri: '70590-2', DTP: 1000 },
+    { Unit: '5', Mesin: 'MAK', Tipe: '8M 453 AK', Seri: '26877', DTP: 2500 },
+    { Unit: '6', Mesin: 'MAK', Tipe: '8M 453 AK', Seri: '26878', DTP: 2500 },
 ]
 
-export const tp = ['TP 1', 'TP 2', 'TP 3', 'TP 4', 'TP 5']
+export const bbmTp = [{ KodeTangki: "TP1" },
+{ KodeTangki: "TP2" },
+{ KodeTangki: "TP3" },
+{ KodeTangki: "TP4" },
+{ KodeTangki: "TP5" },]
 
-export const th = ['TH 1', 'TH 2', 'TH 3', 'TH 4', 'TH 5', 'TH 6']
+export const bbmTh = [{ KodeTangki: "TH1" },
+{ KodeTangki: "TH2" },
+{ KodeTangki: "TH3" },
+{ KodeTangki: "TH4" },
+{ KodeTangki: "TH5" },
+{ KodeTangki: "TH6" },]
 

@@ -41,7 +41,7 @@
 		font-size: 15px;
 		border-radius: 10px;
 		font-weight: 600;
-		/* z-index: 9999; */
+		z-index: 9999;
 		background-color: rgba(42, 157, 144, 0.114) !important;
 		color: #2a9d8f;
 	}
