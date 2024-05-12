@@ -37,17 +37,22 @@
 					{#each allNotulen as not, index}
 						<tr>
 							<td class="align-middle">{index + 1}</td>
+							<td class="align-middle">{date(not.Tanggal)}</td>
 							<td class="align-middle"
-								><a href="/detail/{not.Kode}" class="text-decoration-none">{date(not.Tanggal)}</a
+								><a href="/detail/notulen/{not.Kode}"
+									><i class="bi-check-circle-fill text-success btn"></i></a
 								></td
 							>
-							<td class="align-middle"><i class="bi-check-circle text-success"></i></td>
-							<td class="align-middle"><i class="bi-check-circle text-success"></i></td>
+							<td class="align-middle"
+								><a href="/detail/absensi/{not.Kode}"
+									><i class="bi-check-circle-fill text-success btn"></i></a
+								></td
+							>
 							<td class="align-middle"
 								>{#if not.Foto === ''}
 									<i class="bi-x-circle text-danger"></i>
 								{:else}
-									<i class="bi-check-circle text-success"></i>
+									<i class="bi-check-circle-fill text-success"></i>
 								{/if}</td
 							>
 							<td class="d-flex justify-content-evenly align-items-center"
@@ -93,5 +98,8 @@
 	}
 	.btn {
 		border: none;
+	}
+	i {
+		font-size: 13px;
 	}
 </style>

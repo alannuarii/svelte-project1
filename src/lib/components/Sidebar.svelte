@@ -25,9 +25,13 @@
 	<div class="position-absolute bottom-0 start-0 mb-3 ms-3">
 		<h6 class="navbar-text owner me-4">Designed by <span>Alan Nuari</span></h6>
 		<div class="social">
+			<!-- svelte-ignore element_invalid_self_closing_tag -->
 			<a href="/" class="github me-1"><i class="bi-github" /></a>
+			<!-- svelte-ignore element_invalid_self_closing_tag -->
 			<a href="/" class="instagram me-1"><i class="bi-instagram" /></a>
+			<!-- svelte-ignore element_invalid_self_closing_tag -->
 			<a href="/" class="twitter me-1"><i class="bi-twitter-x" /></a>
+			<!-- svelte-ignore element_invalid_self_closing_tag -->
 			<a href="/" class="whatsapp me-1"><i class="bi-whatsapp" /></a>
 		</div>
 	</div>

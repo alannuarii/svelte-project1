@@ -15,7 +15,7 @@
 			<a class="btn btn-light me-2" href="/rekap/notulen" role="button"
 				><i class="bi-file-earmark-text-fill me-2"></i>Menu 2</a
 			>
-			<a class="btn btn-light me-2" href="/" role="button"
+			<a class="btn btn-light me-2" href="/rekap/absensi" role="button"
 				><i class="bi-file-earmark-spreadsheet-fill me-2"></i>Menu 3</a
 			>
 		</div>

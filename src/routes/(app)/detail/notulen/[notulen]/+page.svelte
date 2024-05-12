@@ -1,5 +1,5 @@
 <script>
-	import { convertDate, convertTime, date4 } from '../../../../lib/js/date';
+	import { convertDate, convertTime, date4 } from '../../../../../lib/js/date';
 
 	export let data;
 	let arrPegawai = [];

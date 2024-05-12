@@ -143,7 +143,7 @@
 				Daily meeting hari ini telah dilaksanakan, silahkan klik link di bawah ini untuk melihat
 				notulen hari ini.
 			</p>
-			<a href="/detail/{data.data.data.agenda[0].Kode}" class="btn btn-sm mt-2">Notulen</a>
+			<a href="/detail/notulen/{data.data.data.agenda[0].Kode}" class="btn btn-sm mt-2">Notulen</a>
 			<hr />
 			<p class="mb-0">
 				Daily meeting selanjutnya dilaksanakan pada tanggal <span>{getNextDay(getToday())}</span>
